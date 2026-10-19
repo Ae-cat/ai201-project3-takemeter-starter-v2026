@@ -51,62 +51,47 @@ whether you hit them:
 
 ---
 
-## 1.
+## 1. Overall accuracy
 
-<!-- Your criterion. It must name a number. -->
+Accuracy on the held-out test split is at least 0.70, in each of the three seeds.
 
-
-
-**Why this target:**
-
+**Why this target:** With four labels, guessing gets about 25%, so 70% is nearly three times chance. A classifier that gets 7 of 10 posts right is useful for sorting posts, though not for anything high-stakes.
 
 
 ---
 
-## 2.
+## 2. Per-label performance
 
-<!-- Your criterion. -->
+Every label has an F1 of at least 0.60 on the held-out test split, in each of the three seeds.
 
-
-
-**Why this target:**
-
+**Why this target:** I don't want the model to ignore a small label. `analysis` will have the fewest posts, so its score will be noisy, and I'll say so if it misses.
 
 
 ---
 
-## 3.
+## 3. Balance
 
-<!-- Your criterion. -->
+No label is more than 60% of the rows in `labels.csv`.
 
-
-
-**Why this target:**
-
+**Why this target:** I picked 60% instead of 50% because 50% is too in-between: a label at half the file isn't clearly lopsided or clearly fine. 60% is where one label clearly dominates and teaches the model to guess it. My largest label is about 30% by my rough count, so I expect to pass. The notebook also warns at 60%.
 
 
 ---
 
-## 4.
+## 4. Consistency
 
-<!-- Your criterion. -->
+I agree with the staff labels on at least 27 of the 30 staff posts (90%).
 
-
-
-**Why this target:**
-
+**Why this target:** If I can't apply someone else's written rules the same way they did, my own 200 labels probably weren't consistent either.
 
 
 ---
 
-## 5.
+## 5. Confidence
 
-<!-- Your criterion. -->
+On the most-confident third of test predictions, accuracy is at least 0.90, in each of the three seeds.
 
-
-
-**Why this target:**
-
+**Why this target:** A model's confidence should mean something. With about 30 test posts, a third is about 10 posts, so this allows at most one miss.
 
 
 ---
