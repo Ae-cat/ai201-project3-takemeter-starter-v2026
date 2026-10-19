@@ -5,6 +5,7 @@
 #
 # Delete the examples below and put yours in.
 
-analysis: makes an argument backed by a specific, checkable fact
+analysis: makes an argument or explanation backed by specific, checkable detail, like a stat, a rule, a named event, or step-by-step reasoning
 hot_take: a confident claim with no support offered
-reaction: an immediate response to something that just happened
+reaction: the writer's feeling about something that just happened to them, with no argument, no general claim, and no request for help (an immediate response)
+help_request: asks for advice or information, and claims nothing

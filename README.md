@@ -55,34 +55,70 @@ subreddit where players, parents, coaches, and fans post about the sport. I coll
      The decision rule is worth a point on its own and it's the thing most
      people leave out. Every taxonomy has a hardest boundary. Name yours. -->
 
-### `label_one`
+### `analysis`
 
-**Definition:**
-
-**Example 1:**
->
-
-**Example 2:**
->
-
-### `label_two`
-
-**Definition:**
+**Definition:** Makes an argument or explanation backed by specific, checkable detail, like a stat, a rule, a named event, or step-by-step reasoning.
 
 **Example 1:**
->
+> In no official rulebook anywhere, is spin called out as a fault... the USAV
+> beach volleyball rule states "Rotation of a set ball may indicate a held ball
+> or multiple contacts during the set but in itself is not a fault."
 
 **Example 2:**
->
+> Attack Efficiency: R = .94. As expected, there is a huge correlation between
+> attack efficiency and winning games. *(S.V League stats breakdown)*
+
+### `hot_take`
+
+**Definition:** A confident claim with no support offered. It might be true, but it isn't argued.
+
+**Example 1:**
+> I feel sad that everything revolves around money and shorter players can't
+> make a living out of this like tall players do (% population wise).
+
+**Example 2:**
+> setting can't be taught or learned some people really do just have that
+> touch, craft, and creativity as a setter.
+
+### `reaction`
+
+**Definition:** The writer's immediate feeling about something that just happened to them, with no argument, no general claim, and no request for help.
+
+**Example 1:**
+> I had my first career ace on varsity today!!
+
+**Example 2:**
+> Seeing these women celebrate and cry after their win tonight at the NORCECA
+> Qualifications made me tear up on my couch!!
+
+### `help_request`
+
+**Definition:** Asks for advice or information, and claims nothing.
+
+**Example 1:**
+> I am having difficult finding 3/4 length sleeve shirts with athletic fabric
+> (sweat profusely). Does anyone have any recommendations on what they wear?
+
+**Example 2:**
+> Jump floats. I always contact it wrong I think it's my toss, any tips on
+> drills to help with my tossing?
 
 ### The hardest boundary
 
-**Which two labels:**
+**Which two labels:** `reaction` vs. `help_request`
 
-**The decision rule I used every time:**
-<!-- e.g. "If the post names a specific checkable fact, it's `analysis`, even
-     if the tone is heated." -->
+**The decision rule I used every time:** If the post ends by asking for advice or opinions, it's `help_request`, even if most of it is feeling. If it asks nothing, it's `reaction`. *(Borderline example: a player describes a bad match and the coach blaming them, then ends with "What are your thoughts?")*
 
+**Order I check in, so the same post always gets the same label:**
+
+1. If it contains a checkable fact that carries an argument, it's `analysis`
+   (even if the tone is emotional).
+2. Otherwise, if its main purpose is to ask for advice or information, it's
+   `help_request`.
+3. Otherwise, if it makes a general claim with no support, it's `hot_take`.
+4. Otherwise, it's `reaction`.
+
+**Scope note:** Promotions, ads, and listings (apps, directories, tickets, open-gym invites) are left out of the dataset rather than given a label.
 
 
 ---
