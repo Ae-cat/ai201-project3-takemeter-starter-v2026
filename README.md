@@ -174,15 +174,13 @@ subreddit where players, parents, coaches, and fans post about the sport. I coll
 
 <!-- Your starting model, your settings, and anything you changed and why. -->
 
-**Base model:**
+**Base model:** `distilbert-base-uncased`
 
-**Settings:** <!-- epochs, learning rate, batch size, seed -->
+**Settings:** 3 epochs, learning rate 2e-5, batch size 16, 128 tokens per post, seed 42. I trained on an Apple Silicon GPU (`mps`) with torch 2.14.1, as recorded in `results.json`.
 
-**Anything I changed from the defaults, and why:**
+**Anything I changed from the defaults, and why:** Nothing. I used the notebook's defaults. The only change was setting `LABELS` to my four labels.
 
-**Split sizes:** <!-- train / val / test, and per-label counts in the test
-split. If a label had fewer than about 8 in test, say so — it explains a lot
-of next unit's variance. -->
+**Split sizes:** train 139, val 31, test 30. Test split per label: `help_request` 17, `reaction` 6, `analysis` 4, `hot_take` 3. Three labels have fewer than 8 test examples, so their F1 will jump around between seeds. That is expected and I'll account for it in Unit 6.
 
 
 
@@ -205,9 +203,9 @@ of next unit's variance. -->
 
 **Moment 2**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* While writing `criteria.md`, I proposed my own targets and asked AI for a sample to react to. For the confidence criterion I wrote 100% accuracy on the model's most-confident predictions.
+- *What came back:* AI told me 100% wasn't the best choice. The most-confident third of a small test split is only about 10 posts, so a single wrong one would fail the criterion. It suggested a high but reachable target instead.
+- *What I changed:* I changed the confidence criterion to at least 90% accuracy on the most-confident third of test predictions, in each of the three seeds. It still means "confident should mean right," but one miss doesn't fail it.
 
 **Pre-labelling disclosure:** I had an AI tool pre-label 180 of the 200 posts (rows 22 to 201), given my four label definitions and my decision order. I read each one and kept every label. Those rows are marked `prelabel` in the `note` column. The first 20 posts (rows 2 to 21) were labelled cold, by me alone with no AI help.
 
