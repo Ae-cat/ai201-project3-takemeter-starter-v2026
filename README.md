@@ -128,19 +128,19 @@ subreddit where players, parents, coaches, and fans post about the sport. I coll
 <!-- Where you collected from, how you labelled, your counts, and three hard
      cases. -->
 
-**Where the posts came from:**
+**Where the posts came from:** I collected 200 public posts from r/volleyball by hand. I left out promos, ads, and listings, and removed duplicates before labelling.
 
-**How I labelled them:** <!-- Cold first? Pre-labelled with AI and corrected?
-Say so plainly — the disclosure is required, not penalised. -->
+**How I labelled them:** I labelled the first 20 posts (rows 2 to 21) cold, by myself and with no AI help, and wrote a one-line reason for each. I then had an AI tool pre-label the other 180 posts using my label definitions. I read every one of those pre-labels and kept the ones I agreed with. Pre-labelled rows are marked `prelabel` in the `note` column and cold rows are marked `cold`.
 
 **Counts per label:**
 
 | Label | Count | Share |
 |---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
-| **Total** |  | 100% |
+| `help_request` | 111 | 55.5% |
+| `reaction` | 44 | 22% |
+| `analysis` | 26 | 13% |
+| `hot_take` | 19 | 9.5% |
+| **Total** | 200 | 100% |
 
 **Three hard cases**
 
@@ -148,25 +148,25 @@ Say so plainly — the disclosure is required, not penalised. -->
      been, and what you chose. These are worth more than the easy 190. -->
 
 **1.**
-> *The post:*
+> *The post:* Row 5. A 17-year-old describes a teammate (the setter) who avoids setting her, with a long story of how it played out. It ends with "Some advice would really be appretiated."
 >
-> *Could have been:*
+> *Could have been:* `help_request` or `reaction`.
 >
-> *I chose, because:*
+> *I chose* `reaction`, *because:* almost all of the post is her telling the story and how it makes her feel, so the advice request is a small part of it.
 
 **2.**
-> *The post:*
+> *The post:* Row 18. A new JV coach tells a player picking her nails to leave the hitting line, then asks "Do you think that's too harsh?"
 >
-> *Could have been:*
+> *Could have been:* `help_request` or `reaction`.
 >
-> *I chose, because:*
+> *I chose* `reaction`, *because:* the coach is reacting to something they just did and second-guessing it. The question is part of that feeling, not a request for advice.
 
 **3.**
-> *The post:*
+> *The post:* Row 21. A fan argues that Montenegro can't improve under its coach, who is "hot-tempered" and overuses substitutions, and backs it with an Alexander the Great quote about lions led by a sheep.
 >
-> *Could have been:*
+> *Could have been:* `hot_take` or `analysis`.
 >
-> *I chose, because:*
+> *I chose* `hot_take`, *because:* the coach's tempo and substitutions are the poster's opinion, and the quote is rhetoric, not a stat or a checkable fact.
 
 ---
 
@@ -199,9 +199,9 @@ of next unit's variance. -->
 
 **Moment 1**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* I sent AI my first 200 collected r/volleyball posts and asked it to survey them for duplicates and posts that shouldn't be in the dataset (promos, ads, listings).
+- *What came back:* a list of 29 posts to remove, including a duplicate pair, along with the reasons for each.
+- *What I changed:* I removed those 29 and collected 29 replacements, then sent them back for the same check. Four were too weak, so I dropped them and found others. That left exactly 200 posts.
 
 **Moment 2**
 
@@ -209,7 +209,7 @@ of next unit's variance. -->
 - *What came back:*
 - *What I changed:*
 
-**Pre-labelling disclosure:**
+**Pre-labelling disclosure:** I had an AI tool pre-label 180 of the 200 posts (rows 22 to 201), given my four label definitions and my decision order. I read each one and kept every label. Those rows are marked `prelabel` in the `note` column. The first 20 posts (rows 2 to 21) were labelled cold, by me alone with no AI help.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
