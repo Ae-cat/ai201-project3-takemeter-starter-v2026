@@ -42,7 +42,8 @@
 <!-- Your community, and what your classifier sorts posts into. Three or four
      sentences. -->
 
-
+My community is r/volleyball (https://www.reddit.com/r/volleyball/), a public
+subreddit where players, parents, coaches, and fans post about the sport. I collected 200 posts and saw real differences in quality: some posts back what they say with specifics like prices, rules, or named events, some state an opinion with nothing behind it, some are an immediate reaction to a game or play, and many just ask for help or advice. My classifier will sort posts into labels based on those differences.
 
 ---
 
