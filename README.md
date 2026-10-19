@@ -152,14 +152,14 @@ subreddit where players, parents, coaches, and fans post about the sport. I coll
 >
 > *Could have been:* `help_request` or `reaction`.
 >
-> *I chose* `reaction`, *because:* almost all of the post is her telling the story and how it makes her feel, so the advice request is a small part of it.
+> *I chose* `reaction`, *because:* almost all of the post is her telling the story and how it makes her feel, so the advice request is a small part of it. My written rule says a post that ends by asking for advice is `help_request`, so this was an exception I made on purpose.
 
 **2.**
 > *The post:* Row 18. A new JV coach tells a player picking her nails to leave the hitting line, then asks "Do you think that's too harsh?"
 >
 > *Could have been:* `help_request` or `reaction`.
 >
-> *I chose* `reaction`, *because:* the coach is reacting to something they just did and second-guessing it. The question is part of that feeling, not a request for advice.
+> *I chose* `reaction`, *because:* the coach is reacting to something they just did and second-guessing it. The question is part of that feeling, not a request for advice. My written rule says a post that ends by asking for opinions is `help_request`, so this was another deliberate exception.
 
 **3.**
 > *The post:* Row 21. A fan argues that Montenegro can't improve under its coach, who is "hot-tempered" and overuses substitutions, and backs it with an Alexander the Great quote about lions led by a sheep.

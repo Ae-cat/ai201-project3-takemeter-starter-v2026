@@ -64,7 +64,7 @@ Accuracy on the held-out test split is at least 0.70, in each of the three seeds
 
 Every label has an F1 of at least 0.60 on the held-out test split, in each of the three seeds.
 
-**Why this target:** I don't want the model to ignore a small label. `analysis` will have the fewest posts, so its score will be noisy, and I'll say so if it misses.
+**Why this target:** I don't want the model to ignore a small label. `hot_take` has the fewest posts (19 of 200, only 3 in the test split), so its score will be noisy, and I'll say so if it misses.
 
 
 ---
@@ -73,7 +73,7 @@ Every label has an F1 of at least 0.60 on the held-out test split, in each of th
 
 No label is more than 60% of the rows in `labels.csv`.
 
-**Why this target:** I picked 60% instead of 50% because 50% is too in-between: a label at half the file isn't clearly lopsided or clearly fine. 60% is where one label clearly dominates and teaches the model to guess it. My largest label is about 30% by my rough count, so I expect to pass. The notebook also warns at 60%.
+**Why this target:** I picked 60% instead of 50% because 50% is too in-between: a label at half the file isn't clearly lopsided or clearly fine. 60% is where one label clearly dominates and teaches the model to guess it. My largest label, `help_request`, turned out to be 55.5% of the file, so I only just pass. The notebook also warns at 60%.
 
 
 ---
