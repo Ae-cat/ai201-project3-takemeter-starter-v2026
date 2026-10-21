@@ -223,18 +223,25 @@ subreddit where players, parents, coaches, and fans post about the sport. I coll
 
 | Measure | Baseline | Trained | Difference |
 |---|---|---|---|
-| Overall accuracy |  |  |  |
-| Macro F1 |  |  |  |
-| F1 — `label_one` |  |  |  |
-| F1 — `label_two` |  |  |  |
+| Overall accuracy | 0.133 | 0.567 | +0.433 |
+| Macro F1 | 0.059 | 0.181 | +0.122 |
+| F1 — `analysis` | 0.235 | 0.000 | -0.235 |
+| F1 — `help_request` | 0.000 | 0.723 | +0.723 |
+| F1 — `hot_take` | 0.000 | 0.000 | +0.000 |
+| F1 — `reaction` | 0.000 | 0.000 | +0.000 |
 
 **What I predicted before I looked:**
 <!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
      prediction made afterwards isn't one. -->
+I predict that my trained model will beat the baseline most on analysis, because those types of posts typically contain numerical values. Although I think it will struggle with hot_take given that one could be mistaken for as a reaction.
 
 **What the gap actually means:**
 <!-- If the baseline matched your trained model, your fine-tuning added
      nothing — and that is a real finding, not a failure. Say it plainly. -->
+
+My prediction was wrong. The trained model scored F1 0.000 on `analysis`, worse than the baseline's 0.235. Its accuracy advantage (+0.433) is not real learning: 0.567 is 17 of 30, exactly the number of `help_request` posts in the test split, so the trained model labelled every post `help_request` and scored 0.000 on the other three labels. The baseline made the mirror-image mistake and labelled every post `analysis`.
+
+I ran the baseline twice. With my written definitions it scored 0.133 accuracy and 0.059 macro F1. With bare label names only (`python baseline.py --definitions none.txt`, saved in `baseline_bare.json`) it scored 0.433 accuracy and 0.451 macro F1, so my definitions cost the baseline 30 points, probably because my `analysis` wording matched almost every long post. The bare-names baseline is the stronger opponent, and it beats my trained model on macro F1 (0.451 vs 0.181). So fine-tuning on 200 posts has not yet added anything beyond predicting my biggest label.
 
 
 
