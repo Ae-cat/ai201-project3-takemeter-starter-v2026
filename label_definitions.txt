@@ -7,5 +7,5 @@
 
 analysis: makes an argument or explanation backed by specific, checkable detail, like a stat, a rule, a named event, or step-by-step reasoning
 hot_take: a confident claim with no support offered
-reaction: the writer's feeling about something that just happened to them, with no argument, no general claim, and no request for help (an immediate response)
+reaction: The writer's immediate feeling about something that just happened to them, with no argument, no general claim, and no request for help.
 help_request: asks for advice or information, and claims nothing
