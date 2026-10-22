@@ -254,27 +254,42 @@ I ran the baseline twice. With my written definitions it scored 0.133 accuracy a
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | ≥ 0.70 | 0.567 | 0.567 | 0.567 | MISSED |
+| 2. Every label F1 | ≥ 0.60 | 0.000 (lowest label) | 0.000 (lowest label) | 0.000 (lowest label) | MISSED |
+| 3. Balance (no label over 60%) | ≤ 60% | 55.5% | 55.5% | 55.5% | MET |
+| 4. Agreement with staff labels | ≥ 27 / 30 | (not seed-dependent, see Agreement Report) | | | PENDING |
+| 5. Accuracy on most-confident third | ≥ 0.90 | 0.70 | 0.70 | 0.80 | MISSED |
+
+Device: all three seeds were trained on `mps` (Apple Silicon GPU), torch 2.14.1, as recorded in `results_three_seeds_before.json`. Criterion 3 depends on the file, not the seed, so it is the same in all three columns.
+
+| Measure | Seed 42 | Seed 7 | Seed 2024 | Spread |
+|---|---|---|---|---|
+| Overall accuracy | 0.567 | 0.567 | 0.567 | 0.000 |
+| Macro F1 | 0.181 | 0.181 | 0.181 | 0.000 |
+| F1 — `analysis` | 0.000 | 0.000 | 0.000 | 0.000 |
+| F1 — `hot_take` | 0.000 | 0.000 | 0.000 | 0.000 |
+| F1 — `reaction` | 0.000 | 0.000 | 0.000 | 0.000 |
+| F1 — `help_request` | 0.723 | 0.723 | 0.723 | 0.000 |
+
 
 ### Confusion matrix
 
 <!-- ⚠️ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
      An image of a matrix earns nothing. -->
 
-| true \ predicted |  |  |  |
-|---|---|---|---|
-| **** |  |  |  |
-| **** |  |  |  |
-| **** |  |  |  |
+| true \ predicted | analysis | hot_take | reaction | help_request |
+|---|---|---|---|---|
+| **analysis** | 0 | 0 | 0 | 4 |
+| **hot_take** | 0 | 0 | 0 | 3 |
+| **reaction** | 0 | 0 | 0 | 6 |
+| **help_request** | 0 | 0 | 0 | 17 |
 
 **My biggest off-diagonal number, and what it means:**
 <!-- Not "the model made mistakes" — WHICH boundary it didn't learn, and which
      direction. "7 real analysis posts were called hot_take and only 3 went the
      other way" is a direction, not just an error rate. -->
+
+The matrix is from seed 42, and the other two seeds are identical. The biggest off-diagonal number is 6: all 6 real `reaction` posts were called `help_request`, and 0 went the other way. In fact every column except `help_request` is empty, so the model has not learned any boundary at all. It labels every post `help_request`, which also sends all 4 `analysis` and all 3 `hot_take` posts to it. Accuracy of 0.567 is just the 17 real `help_request` posts out of 30.
 
 
 
