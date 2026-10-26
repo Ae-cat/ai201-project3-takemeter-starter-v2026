@@ -331,7 +331,7 @@ The matrix is from seed 42, and the other two seeds are identical. The biggest o
      data/staff_taxonomy.md, not your own — so every argument below is made
      from those definitions and those decision rules. -->
 
-**Agreement rate:** ___ / 30 = ___%
+**Agreement rate:** 28 / 30 = 93%
 
 <!-- Nobody grades this number. A 60% who argues every disagreement from the
      stated rules beats a 95% who wrote "staff was right" nine times. Several
@@ -354,24 +354,26 @@ The matrix is from seed 42, and the other two seeds are identical. The biggest o
      what you did across your own 200. -->
 
 **1.**
-> *The post:*
+> *The post:* "The club needs to stop pretending the Tuesday session is for everyone. It isn't and it never has been."
 >
-> *Staff said / I said:*
+> *Staff said / I said:* Staff said `hot_take` / I said `reaction`.
 >
-> *My call, and why:*
+> *My call, and why:* I changed my mind, and staff is right. The post is irritated, but it asserts something general about the club ("it never has been") and offers no support. Rule 2 says a post can be heated and still be `hot_take` if it is making a general claim.
 >
-> *Which pile:*
+> *Which pile:* (a) The rule covered it and I applied it loosely.
 
 **2.**
-> *The post:*
+> *The post:* "Every injury thread on this forum is the same injury and the same three replies."
 >
-> *Staff said / I said:*
+> *Staff said / I said:* Staff said `hot_take` / I said `reaction`.
 >
-> *My call, and why:*
+> *My call, and why:* I still read it as a `reaction`: it responds to what the writer has been shown on the forum, and there is some irritation at how repetitive it is and how little ground the threads cover. It reports the writer's feeling about something they just read, and it offers no argument. I can see staff's side, since "every injury thread" is a general statement, but I think the irritation is what the post is about.
 >
-> *Which pile:*
+> *Which pile:* (c) The rule is ambiguous here and my reading is defensible. Rule 2 asks whether the post is about a claim or about the writer, and this one is both.
 
 **What the pattern in my disagreements tells me:**
+
+I tend to mix up `hot_take` and `reaction` when comparing them. I infer the intent behind a post, for example irritation, and let that change which label I pick, instead of asking whether the post states a general claim. Both of my disagreements were this same pair, in the same direction, so this is a boundary I applied by feel and not by a fixed rule, and it probably affects my own 200 labels too.
 
 
 
