@@ -257,7 +257,7 @@ I ran the baseline twice. With my written definitions it scored 0.133 accuracy a
 | 1. Overall accuracy | ≥ 0.70 | 0.567 | 0.567 | 0.567 | MISSED |
 | 2. Every label F1 | ≥ 0.60 | 0.000 (lowest label) | 0.000 (lowest label) | 0.000 (lowest label) | MISSED |
 | 3. Balance (no label over 60%) | ≤ 60% | 55.5% | 55.5% | 55.5% | MET |
-| 4. Agreement with staff labels | ≥ 27 / 30 | (not seed-dependent, see Agreement Report) | | | PENDING |
+| 4. Agreement with staff labels | ≥ 27 / 30 | 28 / 30 | 28 / 30 | 28 / 30 | MET |
 | 5. Accuracy on most-confident third | ≥ 0.90 | 0.70 | 0.70 | 0.80 | MISSED |
 
 Device: all three seeds were trained on `mps` (Apple Silicon GPU), torch 2.14.1, as recorded in `results_three_seeds_before.json`. Criterion 3 depends on the file, not the seed, so it is the same in all three columns.
@@ -302,13 +302,19 @@ The matrix is from seed 42, and the other two seeds are identical. The biggest o
 
 | # | Criterion | Target | Verdict | How I decided |
 |---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 4 |  |  |  |  |
-| 5 |  |  |  |  |
+| 1 | Overall accuracy | ≥ 0.70 | MISSED | 0.567 in all three seeds, below 0.70 every time. |
+| 2 | Every label F1 | ≥ 0.60 | MISSED | `help_request` is 0.723, but `analysis`, `hot_take` and `reaction` are 0.000 in all three seeds. |
+| 3 | No label over 60% of `labels.csv` | ≤ 60% | MET | `help_request` is 55.5%. This is a property of the file, so it is the same in every seed, and it passes by only 4.5 points. |
+| 4 | Agreement with staff labels | ≥ 27 / 30 | MET | 28 / 30 (93%). This is one measurement, not three seeds, and it is made on staff's three-label taxonomy, not my four. |
+| 5 | Accuracy on the most-confident third | ≥ 0.90 | MISSED | 0.70, 0.70 and 0.80, below 0.90 in every seed. |
 
 **Diagnoses**
+
+**Criteria 1 and 2 (accuracy and per-label F1): the model learned nothing beyond my biggest label.** Accuracy 0.567 is exactly 17 of 30, the number of `help_request` posts in the test split, and my confusion matrix has every prediction in the `help_request` column. The three seeds gave identical results, so this isn't a bad split. It's the same collapse each time. The most likely cause is too few examples: the training split had only 18 `analysis`, 13 `hot_take` and 31 `reaction` posts against 77 `help_request`, and 3 epochs on 139 posts looks too little for the model to move off guessing the majority label. A bare-label-name baseline (macro F1 0.451) beat my trained model (0.181), which suggests the task is reachable and my training setup is what failed.
+
+**Criterion 5 (confidence): the confidence numbers loss their value here.** Because the model labels everything `help_request`, accuracy in its most-confident third is just the share of `help_request` posts that landed there. Its average confidence when right (0.54 in seed 42) is almost the same as when wrong (0.50), so it's barely more sure about the right answers than the wrong ones. This is the same cause as criteria 1 and 2.
+
+**What my agreement report says about labeling versus model.** My 28 of 30 agreement is high, and my only two disagreements were both `reaction` against `hot_take`, so I do apply that boundary inconsistently and it may hurt my `hot_take` and `reaction` labels. But the agreement report can't explain the collapse on `analysis` and `help_request`: I agreed with staff on every `analysis` post, so my `analysis` labeling isn't the problem. And the staff set has no `help_request` label, so the check says nothing about my hardest boundary, `reaction` against `help_request`. My conclusion is that criteria 1, 2 and 5 are mainly a data-size and balance problem in the training set, with a labeling problem on `hot_take` against `reaction` as a smaller second cause.
 
 <!-- For each miss: the cause, and how you know. The four common causes are:
      too few examples for a label, a boundary you applied inconsistently, a
