@@ -207,6 +207,18 @@ subreddit where players, parents, coaches, and fans post about the sport. I coll
 - *What came back:* AI told me 100% wasn't the best choice. The most-confident third of a small test split is only about 10 posts, so a single wrong one would fail the criterion. It suggested a high but reachable target instead.
 - *What I changed:* I changed the confidence criterion to at least 90% accuracy on the most-confident third of test predictions, in each of the three seeds. It still means "confident should mean right," but one miss doesn't fail it.
 
+**Moment 3**
+
+- *What I asked for:* After my first training run I asked AI to look at my baseline and trained results and tell me what they meant.
+- *What came back:* it noticed that my trained model's 0.567 accuracy was exactly 17 of 30, the number of `help_request` posts in my test split, and that the baseline's 0.133 matched always guessing `analysis`. So both models were guessing a single label for everything. It also pointed out that my bare-label-name baseline beat my trained model on macro F1.
+- *What I changed:* I stopped treating 0.567 as a decent result and wrote the diagnosis that the model had not learned my labels. That led me to retrain with more epochs, and to say in the README that my first prediction was wrong.
+
+**Moment 4**
+
+- *What I asked for:* For Milestone 5 I said I was thinking of fixing the labeling issue, and I asked AI for help choosing and running one improvement.
+- *What came back:* AI set up a review of my `hot_take` and `reaction` rows, but warned that relabeling probably wouldn't fix the model guessing `help_request` for everything, since my agreement check found only 2 disagreements. I said I wanted to keep my original labels and fix the collapse instead, and AI suggested raising `EPOCHS` from 3 to 10, because 3 epochs on 139 posts was likely too little training.
+- *What I changed:* I kept my labels and changed only the epochs. It was not a full fix, since criteria 1, 2 and 5 are still missed, but it was an improvement: accuracy rose in two of three seeds and macro F1 went from 0.181 to between 0.185 and 0.452. We worked out the plan together, and I decided which change to make.
+
 **Pre-labelling disclosure:** I had an AI tool pre-label 180 of the 200 posts (rows 22 to 201), given my four label definitions and my decision order. I read each one and kept every label. Those rows are marked `prelabel` in the `note` column. The first 20 posts (rows 2 to 21) were labelled cold, by me alone with no AI help.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
@@ -430,11 +442,19 @@ Seed 42's confusion matrix after the change (rows true, columns predicted):
 
 <!-- For each criterion still missed: what you'd do, and why you stopped. -->
 
+**Criterion 1 (overall accuracy ≥ 0.70) and criterion 2 (every label F1 ≥ 0.60) are still missed.** After 10 epochs my accuracy was 0.700, 0.567 and 0.600, and `hot_take` still had F1 0.000 in all three seeds. What I would do next is collect about 30 more posts each for `hot_take` (19 posts) and `analysis` (26 posts), so the test split has enough of them to measure, and try class weighting so the model is penalised for always guessing `help_request`. I stopped because the milestone asks for one change, measured properly, and I changed only the number of epochs.
+
+**Criterion 5 (accuracy on the most-confident third ≥ 0.90) is still missed.** It was 0.80, 0.80 and 0.90 after the change, so it met the target in only one seed. I would not work on this one directly. Confidence only means something once the model separates the labels, so it should improve if the data fix above works. I stopped for the same reason as above.
+
+**Criteria 3 and 4 were met,** but criterion 3 only by 4.5 points (`help_request` is 55.5%), and the imbalance it measures is probably part of why the model collapsed.
+
 
 
 **The gap between what I meant my labels to capture and what the model
 learned:**
 <!-- Two sentences. Your confusion matrix is the evidence. -->
+
+I meant my four labels to capture what a post does: backs a claim with evidence, states a claim, expresses a feeling, or asks for help. In my best run (seed 42, 10 epochs) the model got all 17 `help_request` posts right, 3 of 6 `reaction`, 1 of 4 `analysis` and 0 of 3 `hot_take`, so it learned mostly that a post is a `help_request`, and it sent 8 of the other 13 posts there too.
 
 
 
