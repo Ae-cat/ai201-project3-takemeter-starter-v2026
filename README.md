@@ -387,21 +387,37 @@ I tend to mix up `hot_take` and `reaction` when comparing them. I infer the inte
 
 ## The Improvement
 
-**What I changed:**
+**What I changed:** One training setting: `EPOCHS` from 3 to 10. Everything else stayed the same: the same 200 labels, learning rate 2e-5, batch size 16, 128 tokens, and the same three seeds (42, 7, 2024). `RUN_LABEL` was set to `"after"`.
 
-**Which diagnosis pointed at it:**
+**Which diagnosis pointed at it:** In my "before" run the model labelled every test post `help_request` in all three seeds, which gave 0.567 accuracy and F1 0.000 on three labels. I diagnosed this as the model never moving off the majority label with only 3 epochs on 139 training posts (about 27 update steps), so I gave it more epochs. I chose this over relabeling because my agreement check found only 2 disagreements out of 30, which can't explain a collapse on every label.
 
 ### Run Log — After
 
+`EPOCHS = 10`, trained on `mps`, results in `results_three_seeds_after.json`.
+
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | ≥ 0.70 | 0.700 | 0.567 | 0.600 | MISSED |
+| 2. Every label F1 | ≥ 0.60 | 0.000 (`hot_take`) | 0.000 (3 labels) | 0.000 (2 labels) | MISSED |
+| 3. Balance (no label over 60%) | ≤ 60% | 55.5% | 55.5% | 55.5% | MET |
+| 4. Agreement with staff labels | ≥ 27 / 30 | 28 / 30 | 28 / 30 | 28 / 30 | MET |
+| 5. Accuracy on most-confident third | ≥ 0.90 | 0.80 | 0.80 | 0.90 | MISSED |
 
-**Did it help, and how do I know:**
+| Measure | Before (3 epochs) | After (10 epochs) |
+|---|---|---|
+| Accuracy, seeds 42 / 7 / 2024 | 0.567 / 0.567 / 0.567 | 0.700 / 0.567 / 0.600 |
+| Macro F1, seeds 42 / 7 / 2024 | 0.181 / 0.181 / 0.181 | 0.452 / 0.185 / 0.256 |
+
+Seed 42's confusion matrix after the change (rows true, columns predicted):
+
+| true \ predicted | analysis | hot_take | reaction | help_request |
+|---|---|---|---|---|
+| **analysis** | 1 | 0 | 1 | 2 |
+| **hot_take** | 0 | 0 | 0 | 3 |
+| **reaction** | 0 | 0 | 3 | 3 |
+| **help_request** | 0 | 0 | 0 | 17 |
+
+**Did it help, and how do I know:** Slightly, but it did not fix the problem. Accuracy rose in two of three seeds (0.567 to 0.700 and 0.600) and stayed at 0.567 in seed 7, and macro F1 went from 0.181 to between 0.185 and 0.452. Only in seed 42 did the model start predicting other labels, getting 3 of 6 `reaction` and 1 of 4 `analysis` right. In seeds 7 and 2024 it still sent almost everything to `help_request`, and `hot_take` was still 0.000 in all three seeds. No verdict changed: criteria 1, 2 and 5 are still MISSED. Accuracy now swings 0.133 across seeds, more than the ten-point limit, so my dataset is too small and lopsided for a stable measure. With only 30 test posts, one post is worth 3.3 points, so even the seed 42 gain is within noise.
 
 <!-- If it didn't, say so. Relabelling that didn't help is a genuinely
      interesting result and earns full credit. -->
